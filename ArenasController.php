@@ -43,9 +43,10 @@ public function fighter()
 public function sight()
 {
 	$this->loadModel('Fighters');
+	$fig=$this->Fighters->allFighters();
 	$this->loadModel('Surroundings');
-	$surroundingslist=$this->Surroundings->find('all', array('conditions'=>array('type'=>'$type', 'x'=>'$coordinate_x', 'y'=>'$coordinate_y')));
 	$sur=$this->Surroundings->arene();
+	$this->set("allFighters",$fig);
 	$this->set("arene", $sur);
 }
 public function diary()
