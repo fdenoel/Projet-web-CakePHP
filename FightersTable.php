@@ -11,18 +11,21 @@ class FightersTable extends Table
 				'message' => 'Only jpg and png' ,
 			)
 		);
+
 	public function fileExtension($check, $extensions, $allowEmpty = true){
 		$file = current($check);
 		if($allowEmpty && empty($file['tmp_name'])){
 			return true;
-		}
+			}
+
 		$extension = strtolower(pathinfo($file['name'] , PAHINFO_EXTENSION));
 		#PATINFO = extension du fichier
-		return in_array($extension, $extensions)
+		return in_array($extension, $extensions);
 		
 		//debug($check);
 		//debug($extensions);
-	}
+		}
+		
 
 	public function test()
 	{ 
@@ -38,6 +41,11 @@ class FightersTable extends Table
 	{
 		return $this->find('all');
 		//return "ok";
+	}
+
+	public function updateFighter()
+	{
+		return $this->find('all');
 	}
 
 	public function allFighters(){
