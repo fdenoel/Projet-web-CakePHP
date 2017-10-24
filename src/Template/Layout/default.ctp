@@ -27,13 +27,18 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
+    <?= $this->Html->css('cake.css') ?> <!-- Changer pour le CSS (par exemple faire le bootstrap) -->
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+    <?php $this->assign('title', 'Projet_Php');?> <!-- Change le titre en haut à gauche "Projet_Php"-->
+    <?php echo $this->Html->link('Acceuil', '/'); ?>
+    <?php echo $this->Html->link('Vue', '/Arenas/Sight'); ?>
+    <?php echo $this->Html->link('Ajouter joueur (temporaire)', '/Players/add'); ?>
 </head>
 <body>
+    <!-- Si vous voulez qu'un menu soit rendu pour toutes vos vues, incluez le ici -->
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
@@ -49,9 +54,15 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </nav>
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
+        <!-- C'est ici que je veux voir mes vues être rendues -->
         <?= $this->fetch('content') ?>
+    <!-- Ajoute un footer pour chaque page rendue -->
     </div>
     <footer>
+            <p>Groupe : SI2-02 </p>
+            <p>Option : AF</p>
+            <p>Auteurs : BIOY Guillaume, DENOEL Florent, VINOT DE LARMINAT Benoît</p>
+            <p>Lien GIThub : https://github.com/fdenoel/Projet-web-CakePHP</p>    
     </footer>
 </body>
 </html>
