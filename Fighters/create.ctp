@@ -1,14 +1,12 @@
 <!-- src/Template/fighters/addfighter.ctp -->
+<?php
 
-<div class="fighters form">
-	<?= $this->Form->create($fighter) ?>
-	    <fieldset>
-	        <legend><?= __('Add Fighter') ?></legend>
-	        <?= $this->Form->control('pseudo') ?>
-	   </fieldset>
-	<?= $this->Form->button(__('Submit')); ?>
-	<?= $this->Form->end() ?>
-</div> 
+echo $this->Form->create('Fighters', array('url'=>['controller'=>'Fighters', 'action'=>'create']));
+echo $this->Form->control('pseudo');
+echo $this->Form->button('Submit', array('type'=>'submit'));
+echo $this->Form->end();
+
+?>
 <!--
 <html>
 	<body>
@@ -26,6 +24,7 @@
 		
 	</body>
 </html>  -->
-
-ok addfighter ctp
+<br>
+ok addfighter.ctp
+<br>
 

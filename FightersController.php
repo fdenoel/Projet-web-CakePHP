@@ -34,12 +34,16 @@
 
 		public function create()
 		{
-			$this->loadModel('Fighters');
-			$fighterlist=$this->Fighters->find('all');
-			//pr($fighterlist->toArray());
+			if($this->request->data){
 
-			$add=$this->Fighters->addFighter();
-			$this->set("addFighter",$add);
+				$this->loadModel('Fighters');
+				$fighterlist=$this->Fighters->find('all');
+				//pr($fighterlist->toArray());
+
+				$add=$this->Fighters->addFighter($this->request->data['pseudo']);
+				$this->set("addFighter",$add);
+			}
+			
 		}
 	
 	}

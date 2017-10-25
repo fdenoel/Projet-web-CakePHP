@@ -35,14 +35,14 @@ class FightersTable extends Table
 		return $fighterlist->Array();
 	}
 
-	public function addFighter()
+	public function addFighter($pseudo)
 	{
 		$FightersTable = TableRegistry::get('fighters');
 		$fighters = $FightersTable->newEntity();
-		$fighters->name = /*$pseudo*/ 'Gimli';
+		$fighters->name = $pseudo /*'Gimli'*/;
 		$fighters->player_id = uniqid();
-		$fighters->coordinate_x=rand(0,14);
-		$fighters->coordinate_y=rand(0,9);
+		$fighters->coordinate_x = 15;
+		$fighters->coordinate_y = 15;
 		$fighters->level = 1;
 		$fighters->xp = 0;
 		$fighters->skill_sight = 2;
