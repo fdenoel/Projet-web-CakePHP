@@ -28,10 +28,19 @@
 			$fighterlist=$this->Fighters->find('all');
 			//pr($fighterlist->toArray());
 
-			$upd=$this->Fighters->updateFighter();
+			$upd=$this->Fighters->updateFighter($pseudo);
 			$this->set("updateFighter",$upd);
 		}
 
+		public function create()
+		{
+			$this->loadModel('Fighters');
+			$fighterlist=$this->Fighters->find('all');
+			//pr($fighterlist->toArray());
+
+			$add=$this->Fighters->addFighter();
+			$this->set("addFighter",$add);
+		}
 	
 	}
 
