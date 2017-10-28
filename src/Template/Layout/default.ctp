@@ -37,6 +37,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?php echo $this->Html->link('Vue | ', '/Arenas/Sight'); ?>
     <?php echo $this->Html->link('Ajouter joueur | ', '/Users/add'); ?>
     <?php echo $this->Html->link('Login | ', '/Users/login'); ?>
+    <?php echo $this->Html->link('Logout | ', '/Users/logout'); ?>
 </head>
 <body>
     <!-- Si vous voulez qu'un menu soit rendu pour toutes vos vues, incluez le ici -->
