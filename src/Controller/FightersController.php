@@ -22,7 +22,7 @@
 		}
 	
 
-		public function update()
+		public function updateLevel()
 		{
 			
 			if($this->request->data){
@@ -31,8 +31,69 @@
 				$fighterlist=$this->Fighters->find('all');
 				//pr($fighterlist->toArray());
 
-				$upd=$this->Fighters->updateFighter($this->request->data['currentId'], $this->request->data['addXp']);
-				$this->set("updateFighter",$upd);
+				$updLvl=$this->Fighters->update_level($this->request->data['addXp']);
+				$this->set("update_level",$updLvl);
+				echo "bonjour";
+			}
+			
+		}
+
+		public function updateStrength()
+		{
+			
+			if($this->request->data){
+
+				$this->loadModel('Fighters');
+				$fighterlist=$this->Fighters->find('all');
+				//pr($fighterlist->toArray());
+
+				$updF=$this->Fighters->update_strength($this->request->data['addStrength']);
+				$this->set("update_strength",$updF);
+			}
+			
+		}
+
+		public function updateSight()
+		{
+			
+			if($this->request->data){
+
+				$this->loadModel('Fighters');
+				$fighterlist=$this->Fighters->find('all');
+				//pr($fighterlist->toArray());
+
+				$updS=$this->Fighters->update_sight($this->request->data['addSight']);
+				$this->set("update_sight",$updS);
+			}
+			
+		}
+
+		public function updateMaxHp()
+		{
+			
+			if($this->request->data){
+
+				$this->loadModel('Fighters');
+				$fighterlist=$this->Fighters->find('all');
+				//pr($fighterlist->toArray());
+
+				$updMax=$this->Fighters->update_maxHp($this->request->data['addHp']);
+				$this->set("update_maxHp",$updMax);
+			}
+			
+		}
+
+		public function updateCurrentHp()
+		{
+			
+			if($this->request->data){
+
+				$this->loadModel('Fighters');
+				$fighterlist=$this->Fighters->find('all');
+				//pr($fighterlist->toArray());
+
+				$updHp=$this->Fighters->update_currentHp($this->request->data['chgHp']);
+				$this->set("update_currentHp",$updHp);
 			}
 			
 		}
