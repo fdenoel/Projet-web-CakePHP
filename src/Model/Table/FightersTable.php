@@ -39,7 +39,7 @@ class FightersTable extends Table
 	{
 		$FightersTable = TableRegistry::get('fighters');
 		$fighters = $FightersTable->newEntity();
-		$fighters->name = $pseudo /*'Gimli'*/;
+		$fighters->name = $pseudo;
 		$fighters->player_id = uniqid();
 		$fighters->coordinate_x = 15;  //Position inexistante, blindé dans /Arenas/sight
 		$fighters->coordinate_y = 15;
@@ -54,25 +54,42 @@ class FightersTable extends Table
 		return "ok";
 	}
 
-	public function updateFighter($currentId, $addXp)
+	public function update_level($addXp)
 	{
 		
 		$FightersTable = TableRegistry::get('fighters');
-		$fighters = $FightersTable->get($currentId); //retourne le fighters que l'on veut modifier
-		//$fighters->coordinate_x = 25;  //Position inexistante, blindé dans /Arenas/sight
-		//$fighters->coordinate_y = 25;
-		$xpGagné = $figther->xp;
-		$fighters->xp = $xpGagné + $addXp;
+		$fighters = $FightersTable->get(1); //retourne le fighters que l'on veut modifier
+		//$xpGagne = $figthers->xp;
+		//$fighters->xp = $xpGagne + $addXp;
+		$fighters->xp = $fighter->xp + $addXp;
 		$fighters->level = floor( $fighters->xp /4); //division Euclidienne
-		//$rest = $fighters->xp %4                   //Reste de la division
-		//$fighters->skill_sight = 3/*$newSight*/;
-		//$fighters->skill_strength = 2/*$newStrength*/;
-		//$fighters->skill_health = 4/*$newHealth*/;
-		//$fighters->current_health = 4/*$newCurrentHealth*/;
 
 		$FightersTable->save($fighters);
-		return "update ok";
-		//return $this->find('all');
+		return "nothing";
+	}
+
+	public function update_strength($addStrength)
+	{
+		
+		$FightersTable = TableRegistry::get('fighters');
+		$fighters = $FightersTable->get(1); //retourne le fighters que l'on veut modifier
+		$basicStrength = $figthers->skill_strength;
+		$fighters->skill_strength = $basicStrength + $addStrength;
+
+		$FightersTable->save($fighters);
+		return "nothing";
+	}
+
+	public function update_sight($addSight)
+	{
+		
+		$FightersTable = TableRegistry::get('fighters');
+		$fighters = $FightersTable->get(1); //retourne le fighters que l'on veut modifier
+		$basicSight = $figthers->skill_sight;
+		$fighters->skill_sight = $basicSight + $addSight;
+
+		$FightersTable->save($fighters);
+		return "nothing";
 	}
 
 	public function test()
