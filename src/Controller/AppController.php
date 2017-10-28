@@ -48,8 +48,42 @@ class AppController extends Controller
          * Enable the following components for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
-        //$this->loadComponent('Security');
-        //$this->loadComponent('Csrf');
+        $this->loadComponent('Security');
+        $this->loadComponent('Csrf');
+        /*$this->loadComponent('Auth', [
+            'loginRedirect' => [
+                'controller' => 'Arenas',
+                'action' => 'sight'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Arenas',
+                'action' => 'sight',
+                'home'
+            ]
+        ]);*/
+        $this->loadComponent('Auth', [
+             'authenticate' => [
+                'Form' => [
+                    'userModel'=>'Players',
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password'
+                    ]
+                ]
+            ], 
+            'loginAction' => [
+                'controller' => 'Players',
+                'action' => 'login'
+            ],
+            // If the user arrives on an unauthorized page,
+            // redirects to the previous page.
+            'unauthorizedRedirect' => $this->referer()
+        ]);
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        $this->Auth->allow(['index', 'sight']);
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-// src/Controller/UsersController.php
+// src/Controller/PlayersController.php
 
 namespace App\Controller;
 
@@ -21,31 +21,51 @@ class PlayersController extends AppController
     {
         parent::beforeFilter($event);
         $this->Auth->allow('add');
+        $this->Auth->allow('login');
     }
 
      public function index()
      {
-        $this->set('users', $this->Players->find('all'));
+        $this->set('player', $this->Players->find('all'));
     }
 
     public function view($id)
     {
-        $user = $this->Players->get($id);
-        $this->set(compact('user'));
+        $player = $this->Players->get($id);
+        $this->set(compact('player'));
     }
 
     public function add()
     {
-        $user = $this->Players->newEntity();
+        $player = $this->Players->newEntity();
         if ($this->request->is('post')) {
-            $user = $this->Players->patchEntity($user, $this->request->getData());
-            if ($this->Players->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-                return $this->redirect(['action' => 'add']);
+            $player = $this->Players->patchEntity($player, $this->request->getData());
+            if ($this->Players->save($player)) {
+                $this->Flash->success(__('L\'utilisateur a été sauvegardé !'));
+                return $this->redirect(['action' => 'login']);
             }
-            $this->Flash->error(__('Unable to add the user.'));
+            $this->Flash->error(__('Impossible d\'ajouter le nouvelle utilisateur.'));
         }
-        $this->set('user', $user);
+        $this->set('player', $player);
+    }
+
+    public function login()
+    {
+        if ($this->request->is('post')) {
+            $player = $this->Auth->identify();
+            if ($player) {
+                $this->Auth->setUser($player);
+                //return $this->redirect($this->Auth->redirectUrl());
+                return $this->redirect(['controller' => 'Arenas',
+                                        'action' => 'index']);
+            }
+            $this->Flash->error(__('Invalid username or password, try again'));
+        }
+    }
+
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
     }
 
 }
