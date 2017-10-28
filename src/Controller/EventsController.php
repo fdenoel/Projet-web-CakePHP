@@ -13,8 +13,7 @@
 		public function affichage()
 		{
 			
-			$ev=$this->loadModel('events');
-			$ev->suppression();
+			$this->loadModel('events');
 			$events=$this->events->find('all');
 			$this->set("events", $events);
 
