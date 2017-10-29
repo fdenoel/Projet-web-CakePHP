@@ -4,9 +4,19 @@ $y=0;
 $proximite=0;
 $occupe;
 
-while($x<10)
+
+echo $this->Form->create('Fighters', array('url'=>['controller'=>'surroundings', 'action'=>'generationDecor']));
+echo $this->Form->button('régénération du décor', array('type'=>'submit'));
+echo $this->Form->end();
+
+echo $this->Form->create('Fighters', array('url'=>['controller'=>'tools', 'action'=>'generationEquipement']));
+echo $this->Form->button('génération de l\'équipement', array('type'=>'submit'));
+echo $this->Form->end();
+echo "<br>";
+
+while($x<15)
 {
-	while($y<15)
+	while($y<10)
 	{
 		$z=abs($fighter['coordinate_y']-$y)+abs($fighter['coordinate_x']-$x);
 		if($z > $fighter['skill_sight'])
@@ -20,6 +30,7 @@ while($x<10)
 			{
 				if($j['coordinate_x']==$x && $j['coordinate_y']==$y)
 				{
+
 					if($j['id']<>$fighter['id'])
 					{
 						echo "E";
@@ -40,7 +51,27 @@ while($x<10)
 						echo "x";
 						$occupe=1;
 					}
+					if($obstacle['coordinate_x']==$x && $obstacle['coordinate_y']==$y && $obstacle['type']=='T')
+					{
+						echo "t";
+						$occupe=1;
+					}
+					if($obstacle['coordinate_x']==$x && $obstacle['coordinate_y']==$y && $obstacle['type']=='W')
+					{
+						echo "w";
+						$occupe=1;
+					}
 				}
+
+				foreach($tool as $obstacle)
+				{
+					if($obstacle['coordinate_x']==$x && $obstacle['coordinate_y']==$y)
+					{
+						echo "A";
+						$occupe=1;
+					}
+				}
+
 				if($occupe==0)
 				{
 					echo "_";
@@ -52,10 +83,6 @@ while($x<10)
 	$x=$x+1;
 	$y=0;
 	echo "<br>";
-}
-if($fighter['coordinate_x']==1)
-{
-	echo "0";
 }
 
 
@@ -82,16 +109,13 @@ foreach($arene as $obstacle)
 }
 
 
-
-
-echo $this->Form->create('Fighters', array('url'=>['controller'=>'Arenas', 'action'=>'deplacement']));
+echo $this->Form->create('Fighters', array('url'=>['controller'=>'Fighters', 'action'=>'deplacement']));
 echo $this->Form->hidden('id', array('value'=> $fighter['id']));
 echo $this->Form->hidden('name', array('value'=> 'nord'));
 echo $this->Form->button('Nord', array('type'=>'submit'));
 echo $this->Form->end();
-echo "<br>";
 
-echo $this->Form->create('Fighters', array('url'=>['controller'=>'Arenas', 'action'=>'deplacement']));
+echo $this->Form->create('Fighters', array('url'=>['controller'=>'Fighters', 'action'=>'deplacement']));
 echo $this->Form->hidden('id', array('value'=> $fighter['id']));
 echo $this->Form->hidden('name', array('value'=> 'ouest'));
 echo $this->Form->button('Ouest', array('type'=>'submit'));
@@ -99,14 +123,14 @@ echo $this->Form->end();
 
 echo "déplacement";
 
-echo $this->Form->create('Fighters', array('url'=>['controller'=>'Arenas', 'action'=>'deplacement']));
+echo $this->Form->create('Fighters', array('url'=>['controller'=>'Fighters', 'action'=>'deplacement']));
 echo $this->Form->hidden('id', array('value'=> $fighter['id']));
 echo $this->Form->hidden('name', array('value'=> 'est'));
 echo $this->Form->button('Est', array('type'=>'submit'));
 echo $this->Form->end();
 
 
-echo $this->Form->create('Fighters', array('url'=>['controller'=>'Arenas', 'action'=>'deplacement']));
+echo $this->Form->create('Fighters', array('url'=>['controller'=>'Fighters', 'action'=>'deplacement']));
 echo $this->Form->hidden('id', array('value'=> $fighter['id']));
 echo $this->Form->hidden('name', array('value'=> 'sud'));
 echo $this->Form->button('Sud', array('type'=>'submit'));
@@ -114,16 +138,16 @@ echo $this->Form->end();
 
 
 echo "<br>";
+echo "<br>";
 
 
-echo $this->Form->create('Fighters', array('url'=>['controller'=>'Arenas', 'action'=>'combat']));
+echo $this->Form->create('Fighters', array('url'=>['controller'=>'Fighters', 'action'=>'combat']));
 echo $this->Form->hidden('id', array('value'=> $fighter['id']));
 echo $this->Form->hidden('name', array('value'=> 'nord'));
 echo $this->Form->button('Nord', array('type'=>'submit'));
 echo $this->Form->end();
-echo "<br>";
 
-echo $this->Form->create('Fighters', array('url'=>['controller'=>'Arenas', 'action'=>'combat']));
+echo $this->Form->create('Fighters', array('url'=>['controller'=>'Fighters', 'action'=>'combat']));
 echo $this->Form->hidden('id', array('value'=> $fighter['id']));
 echo $this->Form->hidden('name', array('value'=> 'ouest'));
 echo $this->Form->button('Ouest', array('type'=>'submit'));
@@ -131,14 +155,14 @@ echo $this->Form->end();
 
 echo "attaque";
 
-echo $this->Form->create('Fighters', array('url'=>['controller'=>'Arenas', 'action'=>'combat']));
+echo $this->Form->create('Fighters', array('url'=>['controller'=>'Fighters', 'action'=>'combat']));
 echo $this->Form->hidden('id', array('value'=> $fighter['id']));
 echo $this->Form->hidden('name', array('value'=> 'est'));
 echo $this->Form->button('Est', array('type'=>'submit'));
 echo $this->Form->end();
 
 
-echo $this->Form->create('Fighters', array('url'=>['controller'=>'Arenas', 'action'=>'combat']));
+echo $this->Form->create('Fighters', array('url'=>['controller'=>'Fighters', 'action'=>'combat']));
 echo $this->Form->hidden('id', array('value'=> $fighter['id']));
 echo $this->Form->hidden('name', array('value'=> 'sud'));
 echo $this->Form->button('Sud', array('type'=>'submit'));
