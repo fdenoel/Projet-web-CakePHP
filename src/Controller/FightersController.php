@@ -34,6 +34,7 @@
 	        $fighter->player_id = uniqid();
 	        if ($this->request->is('post')) {
 	            $fighter = $this->Fighters->patchEntity($fighter, $this->request->getData());
+	            $fighter->player_id = $this->Auth->user('id');
 	            if ($this->Fighters->save($fighter)) {
 	                $this->Flash->success(__('Votre fighter a été sauvegardé.'));
 	                return $this->redirect(['action' => 'index']);
@@ -51,6 +52,22 @@
 		    if ($this->Fighters->delete($fighter)) {
 		        $this->Flash->success(__("Le fighter avec l'id: {0} a été supprimé.", h($id)));
 		        return $this->redirect(['action' => 'index']);
+	    	}
+		}
+
+		public function isAuthorized($user)
+		{
+		    // Tous les utilisateurs enregistrés peuvent ajouter des articles
+		    if ($this->request->getParam('action') === 'add') {
+		        return true;
+		    }
+
+		    // Le propriétaire d'un article peut l'éditer et le supprimer
+		    if (in_array($this->request->getParam('action'), ['delete'])) {
+		        $fighterId = (int)$this->request->getParam('pass.0');
+		        if ($this->Fighters->isOwnedBy($fighterId, $user['id'])) {
+		            return true;
+		        }
 	    	}
 		}
 		

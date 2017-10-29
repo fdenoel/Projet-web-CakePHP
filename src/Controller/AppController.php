@@ -53,7 +53,8 @@ class AppController extends Controller
 
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
-             'authenticate' => [
+            'authorize' => ['Controller'],
+            'authenticate' => [
                 'Form' => [
                     'userModel'=>'Players',
                     'fields' => [
@@ -63,8 +64,8 @@ class AppController extends Controller
                 ]
             ], 
             'loginAction' => [
-                'controller' => 'Arenas',
-                'action' => 'sight'
+                'controller' => 'Users',
+                'action' => 'login'
             ],
             // If the user arrives on an unauthorized page,
             // redirects to the previous page.
