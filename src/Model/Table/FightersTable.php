@@ -116,5 +116,10 @@ class FightersTable extends Table
 		$Fighters->save($fighter);
 	}
 
+	public function isOwnedBy($fighterId, $userId)
+	{
+	    return $this->exists(['id' => $fighterId, 'player_id' => $userId]);
+	}
+
 
 }
