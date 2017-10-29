@@ -46,8 +46,9 @@ public function sight()
 
 	//charger le fighter choisi par le joueur
 	$this->loadModel('Fighters');
+	$tools=$this->loadModel('tools');
+	$fighters = TableRegistry::get('Fighters');
 	$fig=$this->Fighters->Aragorn();
-	$fig2=$this->Fighters->Gimli();
 
 	//charger la map
 	$this->loadModel('Surroundings');
@@ -59,12 +60,16 @@ public function sight()
 		$sortie="FALSE";
 		while($sortie=="FALSE")
 		{
-			$a=rand(0,9);
-			$b=rand(0,14);
+			$sortie="TRUE";
+			$a=rand(0,14);
+			$b=rand(0,9);
 			foreach ($sur as $i) {
-				if($i['coordinate_x']==$a && $i['coordinate_y']==$b && $i['type']=="sol")
+				if($i['coordinate_x']==$a && $i['coordinate_y']==$b)
 				{
-					$sortie="TRUE";
+					$sortie="FALSE";
+				}
+				if($sortie=="TRUE")
+				{	
 					$fighter = $fighters->find('all')->where(['coordinate_x' == 15 or 'coordinate_y' == 15])->first();
 					$fighter->coordinate_x = $a;
 					$fighter->coordinate_y = $b;
@@ -76,179 +81,16 @@ public function sight()
 
 
 
-	$fig=$this->Fighters->Aragorn();
-	$fig2=$this->Fighters->allfighters();
+	
+	$fig2 = $fighters->find('all');
 
 	//envoyer le fighter
 	$this->set("allFighters",$fig2);
 	$this->set("fighter", $fig);
+	$this->set("tool", $tools);
 	//envoyer la map
 	$this->set("arene", $sur);
 }
-
-
-public function deplacement()
-{
-	$this->loadModel('Fighters');
-	$fig=$this->Fighters->allFighters()->where(['id' => $this->request->data['id']])->first();
-	$fighters=$this->Fighters->allFighters();
-
-	$this->loadModel('Surroundings');
-	$sur=$this->Surroundings->arene();
-
-
-
-	if($this->request->data){
-		if($fig['coordinate_x']-1 >=0 && $this->request->data['name'] == "nord"){
-			$coordx=$fig['coordinate_x']-1;
-			$coordy=$fig['coordinate_y'];
-			$arret=0;
-			foreach($fighters as $a)
-			{
-				if($a['coordinate_x']==$coordx && $a['coordinate_y']==$coordy && $a['id']<>$fig['id'])
-				{
-					$arret=1;
-				}
-			}
-			if ($arret==0) {
-				foreach ($sur as $loc) {
-					if($loc['coordinate_x']==$coordx && $loc['coordinate_y']==$coordy && $loc['type']=="sol")
-					{
-						$fighters = TableRegistry::get('Fighters');
-						$fighter = $fighters->find('all')->where(['id' ==$fig['id'] ])->first();
-						$fighter->coordinate_x =$fig['coordinate_x']-1;
-						$fighters->save($fighter);
-					}
-				}
-			}        	
-      	}
-
-
-
-      /*if($fig['coordinate_y']-1 >=0 && $this->request->data['id'] == 2){
-			$coordy=$fig['coordinate_y']-1;
-			$coordx=$fig['coordinate_x'];
-			$arret=0;
-			foreach($fighters as $a)
-			{
-				if($a['coordinate_x']==$coordx && $a['coordinate_y']==$coordy && $a['id']<>$fig['id'])
-				{
-					$arret=1;
-				}
-			}
-
-
-			if ($arret==0) {
-				foreach ($sur as $loc) {
-					if($loc['coordinate_x']==$coordx && $loc['coordinate_y']==$coordy && $loc['type']=="sol")
-					{
-						$fighters = TableRegistry::get('Fighters');
-						$fighter = $fighters->find('all')->where(['id' ==$fig['id'] ])->first();
-						$fighter->coordinate_y =$fig['coordinate_y']-1;
-						$fighters->save($fighter);
-					}
-				}
-			}
-     	}
-
-
-      if($fig['coordinate_y']+1 <=14 && $this->request->data['id'] == 3){
-			$coordy=$fig['coordinate_y']+1;
-			$coordx=$fig['coordinate_x'];
-			$arret=0;
-			foreach($fighters as $a)
-			{
-				if($a['coordinate_x']==$coordx && $a['coordinate_y']==$coordy && $a['id']<>$fig['id'])
-				{
-					$arret=1;
-				}
-			}
-
-			if ($arret==0) {
-				foreach ($sur as $loc) {
-					if($loc['coordinate_x']==$coordx && $loc['coordinate_y']==$coordy && $loc['type']=="sol")
-					{
-						$fighters = TableRegistry::get('Fighters');
-						$fighter = $fighters->find('all')->where(['id' ==$fig['id'] ])->first();
-						$fighter->coordinate_y =$fig['coordinate_y']+1;
-						$fighters->save($fighter);
-					}
-				}
-			}
-      	}
-
-
-
-      if($fig['coordinate_x']+1 <=9 && $this->request->data['id'] == 4){
-			$coordx=$fig['coordinate_x']+1;
-			$coordy=$fig['coordinate_y'];
-			$arret=0;
-			foreach($fighters as $a)
-			{
-				if($a['coordinate_x']==$coordx && $a['coordinate_y']==$coordy && $a['id']<>$fig['id'])
-				{
-					$arret=1;
-				}
-			}
-
-			if ($arret==0) {
-				foreach ($sur as $loc) {
-					if($loc['coordinate_x']==$coordx && $loc['coordinate_y']==$coordy && $loc['type']=="sol")
-					{
-						$fighters = TableRegistry::get('Fighters');
-						$fighter = $fighters->find('all')->where(['id' ==$fig['id'] ])->first();
-						$fighter->coordinate_x =$fig['coordinate_x']+1;
-						$fighters->save($fighter);
-					}
-				}
-			}        	
-    	}*/
-	}
-	$this->setAction("sight");
-}
-
-
-
-
-
-//fonction décrivant une attaque
-//toucher=d20-niv attaqué +niv attaquant
-//dégats=force attaquant
-//xp+1 à chaque attaque et +niv attaqué s'il meurt
-//1=attaquant 2=attaqué
-public function attaque()
-{
-
-	if($this->request->data)
-	{
-
-	}
-
-
-
-
-
-
-
-
-	$fighters = TableRegistry::get('Fighters');
-	$fighter1 = $fighters->find('all')->where(['id' == '$id1']);
-	$fighter2 = $fighters->find('all')->where(['id' == '$id2']);
-	if(rand(1,20)-$fighter2['level']+$fighter1['level']>=10)
-	{
-		$fighter2->current_health = $fighter2['current_health']-$fighter1['skill_strength'];
-		$Fighters->save($fighter2);
-		$fighter1->xp = $fighter1['xp']+1;
-		if($fighter2['current_health'] <=0)
-		{
-			$fighter1->xp = $fighter1['xp']+$fighter2['level'];
-		}
-		$fighters->save($fighter1);
-	}
-	$this->setAction("sight");
-}
-
-
 
 
 public function diary()
