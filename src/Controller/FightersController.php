@@ -9,6 +9,69 @@
 	*/
 	class FightersController extends AppController
 	{
+
+		public function initialize()
+	    {
+	        parent::initialize();
+	        $this->loadComponent('Flash'); // Charge le FlashComponent
+	    }
+
+		public function index()
+	    {
+	        $fighter = $this->Fighters->find('all');
+	        $this->set(compact('fighter'));
+	    }
+
+	    public function view($id = null)
+	    {
+	        $fighter = $this->Fighters->get($id);
+	        $this->set(compact('fighter'));
+	    }
+
+	    public function add()
+	    {
+	        $fighter = $this->Fighters->newEntity();
+	        $fighter->player_id = uniqid();
+	        if ($this->request->is('post')) {
+	            $fighter = $this->Fighters->patchEntity($fighter, $this->request->getData());
+	            if ($this->Fighters->save($fighter)) {
+	                $this->Flash->success(__('Votre fighter a été sauvegardé.'));
+	                return $this->redirect(['action' => 'index']);
+	            }
+	            $this->Flash->error(__('Impossible d\'ajouter votre fighter.'));
+	        }
+	        $this->set('fighter', $fighter);
+	    }
+
+	    public function delete($id)
+		{
+		    $this->request->allowMethod(['post', 'delete']);
+
+		    $fighter = $this->Fighters->get($id);
+		    if ($this->Fighters->delete($fighter)) {
+		        $this->Flash->success(__("Le fighter avec l'id: {0} a été supprimé.", h($id)));
+		        return $this->redirect(['action' => 'index']);
+	    	}
+		}
+		
+		/*public function index()
+	    {
+	        $fighter = $this->Fighters->find('all');
+	        $this->set(compact('fighter'));
+	    }
+
+		public function initialize()
+		{
+		parent::initialize();
+		$this->loadComponent('Flash'); // Charge le FlashComponent
+		}
+
+		public function view($id)
+		{
+		$fighter = $this->Fighters->get($id);
+		$this->set(compact('fighter'));
+		}
+
 		public function edit()
 		{
 			if(§empty($this->request->data)){
@@ -121,6 +184,15 @@
 			$aff=$this->Fighters->affListFighter();
 			$this->set("affListFighter",$aff);
 		}
-	
-	}
 
+		public function delete($id)
+		{
+			$this->request->allowMethod(['post', 'delete']);
+			$fighterlist = $this->Fighters->get($id);
+			if ($this->Fighters->delete($fighterlist)) {
+			$this->Flash->success(__('The article with id: {0} has been deleted.', h($id)));
+			return $this->redirect(['action' => 'create']);
+		}*/
+
+
+}
