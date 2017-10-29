@@ -71,6 +71,13 @@ class FightersTable extends Table
 		return $this->find('all');
 	}
 
+	public function deleteFighter($id)
+	{
+		$fighters = TableRegistry::get('Fighters');
+		$fighter = $fighters->get($id);
+		$fighters->delete($fighter);
+	}
+
 	public function allFighters(){
 		return $this->find('all')->first();
 	}
@@ -85,6 +92,10 @@ class FightersTable extends Table
 	{
 		$Fighters = TableRegistry::get('Fighters');
 		$fighter = $Fighters->find('all')->where(['id' == $id ])->first();
+		$a=$fighter['coordinate_x'];
+		$x=$x+$a;
+		$a=$fighter['coordinate_y'];
+		$y=$y+$a;
 		$fighter->coordinate_y = $y;
 		$fighter->coordinate_x = $x;
 		$Fighters->save($fighter);
@@ -94,6 +105,8 @@ class FightersTable extends Table
 	{
 		$Fighters = TableRegistry::get('Fighters');
 		$fighter = $Fighters->find('all')->where(['id' == $id ])->first();
+		$a=$fighter['xp'];
+		$xp=$xp+$a;
 		$fighter->xp = $xp;
 		$Fighters->save($fighter);
 	}
@@ -102,6 +115,12 @@ class FightersTable extends Table
 	{
 		$Fighters = TableRegistry::get('Fighters');
 		$fighter = $Fighters->find('all')->where(['id' == $id ])->first();
+		$a=$fighter['skill_sight'];
+		$vue=$vue+$a;
+		$a=$fighter['skill_health'];
+		$vie=$vie+$a;
+		$a=$fighter['skill_strength'];
+		$force=$force+$a;
 		$fighter->skill_strength = $force;
 		$fighter->skill_health = $vie;
 		$fighter->skill_sight = $vue;
@@ -112,9 +131,20 @@ class FightersTable extends Table
 	{
 		$Fighters = TableRegistry::get('Fighters');
 		$fighter = $Fighters->find('all')->where(['id' == $id ])->first();
-		$fighter->level = $niv;
+		$a=$fighter['level'];
+		$fighter->level = $niv+$a;
 		$Fighters->save($fighter);
 	}
+
+	public function updatePv($pv,$id)
+	{
+		$Fighters = TableRegistry::get('Fighters');
+		$fighter = $Fighters->get($id);
+		$a=$fighter['current_health'];
+		$fighter->current_health = $a-$pv;
+		$Fighters->save($fighter);
+	}
+
 
 	public function isOwnedBy($fighterId, $userId)
 	{
