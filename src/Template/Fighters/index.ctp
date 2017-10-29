@@ -26,3 +26,13 @@
     </tr>
     <?php endforeach; ?>
 </table>
+<table>
+    <tr>
+        <td><?= $this->Html->link(
+                            'Ajouter un fighter', '/Fighters/add',
+                            ['class' => 'button', 'target' => '_blank']) ?></td>
+        <td><?= $this->Html->link(
+                            'Retour au menu', '/',
+                            ['class' => 'button', 'target' => '_blank']) ?></td>
+    </tr>
+</table>
