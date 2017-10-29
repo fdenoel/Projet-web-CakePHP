@@ -11,7 +11,7 @@ class UsersController extends AppController
         {
         parent::beforeFilter($event);
         $this->loadModel('Players');
-        $this->Auth->allow(['add', 'logout']);
+        $this->Auth->allow(['add', 'logout', 'login']);
         }
 
     public function index()
