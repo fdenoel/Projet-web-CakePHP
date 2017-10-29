@@ -22,9 +22,11 @@ class SurroundingsTable extends Table
 		return $this->deleteAll(['id' < 40 ]);
 	}
 
-	public function suppressionMonstre()
+	public function suppressionMonstre($id)
 	{
-		return $this->deleteAll(['type' == 'W' ]);
+		$fighters = TableRegistry::get('surroundings');
+		$fighter = $fighters->get($id);
+		$fighters->delete($fighter);
 	}
 
 }

@@ -21,8 +21,10 @@ class ToolsTable extends Table
 	public function appropriation($idt, $idf)
 	{
 		$tools = TableRegistry::get('tools');
-		$tool = $tools->find('all')->where(['id' == $idt ])->first();
+		$tool = $tools->get($idt);
 		$tool->fighter_id = $idf;
+		$tool->coordinate_x = 20;
+		$tool->coordinate_y = 20;
 		$tools->save($tool);
 
 	}
