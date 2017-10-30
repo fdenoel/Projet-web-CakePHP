@@ -10,26 +10,21 @@
 	*/
 	class FightersController extends AppController
 	{
-
-
 		public function initialize()
 	    {
 	        parent::initialize();
 	        $this->loadComponent('Flash'); // Charge le FlashComponent
 	    }
-
 		public function index()
 	    {
 	        $fighter = $this->Fighters->find('all');
 	        $this->set(compact('fighter'));
 	    }
-
 	    public function view($id = null)
 	    {
 	        $fighter = $this->Fighters->get($id);
 	        $this->set(compact('fighter'));
 	    }
-
 	    public function add()
 	    {
 	        $fighter = $this->Fighters->newEntity();
@@ -45,7 +40,6 @@
 	        }
 	        $this->set('fighter', $fighter);
 	    }
-
 	    public function delete($id)
 		{
 		    $this->request->allowMethod(['post', 'delete']);
@@ -55,7 +49,6 @@
 		        return $this->redirect(['action' => 'index']);
 	    	}
 		}
-
 		public function isAuthorized($user)
 		{
 		    // Tous les utilisateurs enregistrés peuvent ajouter des articles
@@ -70,8 +63,6 @@
 		        }
 	    	}
 		}
-
-
 		public function edit()
 		{
 			if(§empty($this->request->data)){
@@ -83,35 +74,47 @@
 				$this->request->data = $this->Fighters->read();
 			}
 		}
-	
 
+		public function updateLevel()
+		{
+			
+				$a=$this->loadModel('Fighters');
+				//$fighterlist=$this->Fighters->find('all');
+				//pr($fighterlist->toArray());
+
+				$fighters = TableRegistry::get('Fighters');
+				$id=1;
+
+				$fig=$this->Fighters->find('all')->where(['id'=>$id])->first();
+				$this->set("f",$fig);
+				if($this->request->data){
+				$a->update_level($fig['id'], $this->request->data['skill']);
+			}
+				$this->redirect("/arenas/sight");
+			
+		}
+	
 		public function update()
 		{
 			$this->loadModel('Fighters');
 			$fighterlist=$this->Fighters->find('all');
 			//pr($fighterlist->toArray());
-
 			$upd=$this->Fighters->updateFighter($pseudo);
 			$this->set("updateFighter",$upd);
 		}
-
 		public function create()
 		{
 			if($this->request->data){
-
 				$this->loadModel('Fighters');
 				$fighterlist=$this->Fighters->find('all');
 				//pr($fighterlist->toArray());
-
 				$add=$this->Fighters->addFighter($this->request->data['pseudo']);
 				$this->set("addFighter",$add);
 			}
 			
 		}
-
 		public function deplacement()
 		{
-
 			//si on a du data
 			$vivant=1;
 			if($this->request->data)
@@ -120,16 +123,12 @@
 				$f=$this->loadModel('Fighters');
 				$fig=$this->Fighters->find('all')->where(['id' => $this->request->data['id']])->first();/*si besoin créer une fonction qui le fait naturellement*/
 				$fighters=$this->Fighters->find('all');
-
 				$t=$this->loadModel('tools');
 				$tools=$this->tools->find('all');
-
 				//on charge la liste des obstacles pour vérification
 				$this->loadModel('Surroundings');
 				$sur=$this->Surroundings->find('all');
-
 				$ev=$this->loadModel('events');
-
 				//si on est pas sur la rangée du haut et qu'on va vers le haut
 				if($fig['coordinate_x']-1 >=0 && $this->request->data['name'] == "nord")
 				{
@@ -137,8 +136,6 @@
 					$coordx=$fig['coordinate_x']-1;
 					$coordy=$fig['coordinate_y'];
 					$arret=0;
-
-
 					//on teste qu'aucun combattant n'est à la nouvelle position
 					foreach ($fighters as $f) {
 						$x=$f['coordinate_x'];
@@ -148,7 +145,6 @@
 							$arret=1;
 						}
 					}
-
 					//on teste qu'aucun mur n'est à la nouvelle position
 					foreach ($sur as $f) {
 						$x=$f['coordinate_x'];
@@ -169,8 +165,6 @@
 							
 						}
 					}
-
-
 					if($arret == 0)
 					{
 						$f=$this->loadModel('Fighters');
@@ -205,10 +199,7 @@
 							}
 						}
 					}
-
 				}
-
-
 				//si on est pas sur la rangée de gauche et qu'on va vers la gauche
 				if($fig['coordinate_y']-1 >=0 && $this->request->data['name'] == "ouest")
 				{
@@ -216,8 +207,6 @@
 					$coordx=$fig['coordinate_x'];
 					$coordy=$fig['coordinate_y']-1;
 					$arret=0;
-
-
 					//on teste qu'aucun combattant n'est à la nouvelle position
 					foreach ($fighters as $f) {
 						$x=$f['coordinate_x'];
@@ -227,7 +216,6 @@
 							$arret=1;
 						}
 					}
-
 					//on teste qu'aucun mur n'est à la nouvelle position
 					foreach ($sur as $s) {
 						$x=$s['coordinate_x'];
@@ -247,8 +235,6 @@
 							}	
 						}
 					}
-
-
 					if($arret == 0)
 					{
 						$f=$this->loadModel('Fighters');
@@ -284,8 +270,6 @@
 						}
 					}
 				}
-
-
 				//si on est pas sur la rangée de droite et qu'on va vers la droite
 				if($fig['coordinate_y']+1 <10 && $this->request->data['name'] == "est")
 				{
@@ -293,8 +277,6 @@
 					$coordx=$fig['coordinate_x'];
 					$coordy=$fig['coordinate_y']+1;
 					$arret=0;
-
-
 					//on teste qu'aucun combattant n'est à la nouvelle position
 					foreach ($fighters as $f) {
 						$x=$f['coordinate_x'];
@@ -304,7 +286,6 @@
 							$arret=1;
 						}
 					}
-
 					//on teste qu'aucun mur n'est à la nouvelle position
 					foreach ($sur as $f) {
 						$x=$f['coordinate_x'];
@@ -325,8 +306,6 @@
 							
 						}
 					}
-
-
 					if($arret == 0)
 					{
 						$f=$this->loadModel('Fighters');
@@ -362,8 +341,6 @@
 						}
 					}
 				}
-
-
 				//si on est pas sur la rangée du bas et qu'on va vers le bas
 				if($fig['coordinate_x']+1 <15 && $this->request->data['name'] == "sud")
 				{
@@ -371,8 +348,6 @@
 					$coordx=$fig['coordinate_x']+1;
 					$coordy=$fig['coordinate_y'];
 					$arret=0;
-
-
 					//on teste qu'aucun combattant n'est à la nouvelle position
 					foreach ($fighters as $f) {
 						$x=$f['coordinate_x'];
@@ -382,7 +357,6 @@
 							$arret=1;
 						}
 					}
-
 					//on teste qu'aucun mur n'est à la nouvelle position
 					foreach ($sur as $f) {
 						$x=$f['coordinate_x'];
@@ -403,8 +377,6 @@
 							
 						}
 					}
-
-
 					if($arret == 0)
 					{
 						$f=$this->loadModel('Fighters');
@@ -441,14 +413,11 @@
 					}
 				}
 			}
-
-
 			if($vivant==1)
 			{
 				$fig=$this->Fighters->Aragorn();
 				$fighters = TableRegistry::get('Fighters');
 				$fig2 = $fighters->find('all');
-
 				//envoyer le fighter
 				$this->set("allFighters",$fig2);
 				$this->set("fighter", $fig);
@@ -463,8 +432,6 @@
 			}
 			
 		}
-
-
 				//fonction décrivant une attaque
 				//toucher=d20-niv attaqué +niv attaquant
 				//dégats=force attaquant
@@ -472,28 +439,22 @@
 				//1=attaquant 2=attaqué
 		public function combat()
 		{
-
 			if($this->request->data)
 			{
 				//on charge le modèle fighter, le fighter à update et la liste des fighters pour vérification
 				$b=$this->loadModel('Fighters');
 				$fig=$this->Fighters->find('all')->where(['id' => $this->request->data['id']])->first();/*si besoin créer une fonction qui le fait naturellement*/
 				$fighters=$this->Fighters->find('all');
-
 				//on charge la liste des obstacles pour vérification liée au monstre
 				$a=$this->loadModel('Surroundings');
 				$sur=$this->Surroundings->arene();
-
 				$ev=$this->loadModel('Events');
-
 				//si on est pas sur la rangée du haut et qu'on attaque vers le haut
 				if($fig['coordinate_x']-1 >=0 && $this->request->data['name'] == "nord")
 				{
-
 					//variables enregistrant la nouvelle position de $fig
 					$coordx=$fig['coordinate_x']-1;
 					$coordy=$fig['coordinate_y'];
-
 					//on vérifie si le monstre est à l'endroit attaqué
 					foreach ($sur as $monstre) {
 						if($monstre['type'] == 'W')
@@ -501,13 +462,11 @@
 							if($monstre['coordinate_x'] == $coordx && $monstre['coordinate_y'] == $coordy)
 							{
 								$a->suppressionMonstre($monstre['id']);
-
 								$message=Text::insert(":name detruit le monstre invisible", ['name' => $fig['name']]);
 								$ev->insertion($message, $coordx, $coordy);
 							}
 						}
 					}
-
 					//on vérifie s'il y a un combattant à l'endroit attaqué
 					foreach($fighters as $f)
 					{
@@ -538,23 +497,16 @@
 							{
 								$message=Text::insert(":name rate :name2", ['name' => $fig['name'], 'name2' => $f['name']]);
 								$ev->insertion($message, $coordx, $coordy);
-
 							}
 						}
 					}
 				}
-
-
-
-
 				//si on est pas sur la rangée de gauche et qu'on attaque vers la gauche
 				if($fig['coordinate_y']-1 >=0 && $this->request->data['name'] == "ouest")
 				{
-
 					//variables enregistrant la nouvelle position de $fig
 					$coordx=$fig['coordinate_x'];
 					$coordy=$fig['coordinate_y']-1;
-
 					//on vérifie si le monstre est à l'endroit attaqué
 					foreach ($sur as $monstre) {
 						if($monstre['type'] == 'W')
@@ -567,7 +519,6 @@
 							}
 						}
 					}
-
 					//on vérifie s'il y a un combattant à l'endroit attaqué
 					foreach($fighters as $f)
 					{
@@ -599,20 +550,16 @@
 							{
 								$message=Text::insert(":name rate :name2", ['name' => $fig['name'], 'name2' => $f['name']]);
 								$ev->insertion($message, $coordx, $coordy);
-
 							}
 						}
 					}
 				}
-
-
 				//si on est pas sur la rangée de droite et qu'on attaque vers la droite
 				if($fig['coordinate_y']+1 <10 && $this->request->data['name'] == "est")
 				{
 					//variables enregistrant la nouvelle position de $fig
 					$coordx=$fig['coordinate_x'];
 					$coordy=$fig['coordinate_y']+1;
-
 					//on vérifie si le monstre est à l'endroit attaqué
 					foreach ($sur as $monstre) {
 						if($monstre['type'] == 'W')
@@ -625,7 +572,6 @@
 							}
 						}
 					}
-
 					//on vérifie s'il y a un combattant à l'endroit attaqué
 					foreach($fighters as $f)
 					{
@@ -659,21 +605,16 @@
 							{
 								$message=Text::insert(":name rate :name2", ['name' => $fig['name'], 'name2' => $f['name']]);
 								$ev->insertion($message, $coordx, $coordy);
-
 							}
 						}
 					}
 				}
-
-
 				//si on est pas sur la rangée du bas et qu'on attaque vers le bas
 				if($fig['coordinate_x']+1 <15 && $this->request->data['name'] == "sud")
 				{
-
 					//variables enregistrant la nouvelle position de $fig
 					$coordx=$fig['coordinate_x']+1;
 					$coordy=$fig['coordinate_y'];
-
 					//on vérifie si le monstre est à l'endroit attaqué
 					foreach ($sur as $monstre) {
 						if($monstre['type'] == 'W')
@@ -686,7 +627,6 @@
 							}
 						}
 					}
-
 					//on vérifie s'il y a un combattant à l'endroit attaqué
 					foreach($fighters as $f)
 					{
@@ -718,20 +658,15 @@
 							{
 								$message=Text::insert(":name rate :name2", ['name' => $fig['name'], 'name2' => $f['name']]);
 								$ev->insertion($message, $coordx, $coordy);
-
 							}
 						}
 					}
 				}
-
 			}
-
 			$fig=$this->Fighters->Aragorn();
 			$fig2=$this->Fighters->find('all');
 			$this->loadModel('tools');
-
 			$tools=$this->tools->find('all');
-
 			//envoyer le fighter
 			$this->set("allFighters",$fig2);
 			$this->set("fighter", $fig);
@@ -740,31 +675,6 @@
 			$this->set("arene", $sur);
 			$this->render('../Arenas/sight');
 		}
-
-
-/*		J'AI ENVISAGE DE LA FAIRE MAIS BENOIT S'EN OCCUPE. CELA PEUT SERVIR D'EXEMPLE POUR S'INSPIRER
-		public function monterNiveau()
-		{
-			$this->loadModel('Fighters');
-			$ev=$this->loadModel('events');
-			if($this->request->data)
-			{
-				if($this->request->data['name']=="L")
-				{
-					/*ON UPDATE LES PVS MAX A PV MAX+3*/
-				/*}
-				if($this->request->data['name']=="V")
-				{
-					/*ON UPDATE LA VUE A VUE+1*/
-				/*}
-				if($this->request->data['name']=="D")
-				{
-					/*ON UPDATE LA FORCE A FORCE+1*/
-				/*}
-				/*ON UPDATE LES PVS ACTUELS A PVS MAX*/
-				/*$ev->insertion($fig['name']+" est monté au niveau "+$fig['level'], $coordx, $coordy);
-			}
-		}*/
 
 	
 	}
