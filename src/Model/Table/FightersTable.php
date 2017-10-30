@@ -1,9 +1,8 @@
 <?php
-namespace App\Model\Table;
 
+namespace App\Model\Table;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
-
 
 class FightersTable extends Table
 {
@@ -19,7 +18,6 @@ class FightersTable extends Table
 		if($allowEmpty && empty($file['tmp_name'])){
 			return true;
 			}
-
 		$extension = strtolower(pathinfo($file['name'] , PAHINFO_EXTENSION));
 		#PATINFO = extension du fichier
 		return in_array($extension, $extensions);
@@ -27,7 +25,6 @@ class FightersTable extends Table
 		//debug($check);
 		//debug($extensions);
 		}
-
 
 	public function getFighter()
 	{
@@ -49,10 +46,8 @@ class FightersTable extends Table
 		$fighters->skill_strength = 1;
 		$fighters->skill_health = 3;
 		$fighters->current_health = 3;
-
 		$FightersTable->save($fighters);
 		return "ok";
-
 	}
 
 	public function test()
@@ -71,19 +66,14 @@ class FightersTable extends Table
 		return $this->find('all');
 	}
 
-	public function deleteFighter($id)
-	{
-		$fighters = TableRegistry::get('Fighters');
-		$fighter = $fighters->get($id);
-		$fighters->delete($fighter);
-	}
-
 	public function allFighters(){
 		return $this->find('all')->first();
 	}
+
 	public function Aragorn(){
 		return $this->find('all')->where(['id' => 1])->first();
 	}
+
 	public function Gimli(){
 		return $this->find('all')->where(['id' => 3])->first();
 	}
@@ -92,22 +82,8 @@ class FightersTable extends Table
 	{
 		$Fighters = TableRegistry::get('Fighters');
 		$fighter = $Fighters->find('all')->where(['id' == $id ])->first();
-		$a=$fighter['coordinate_x'];
-		$x=$x+$a;
-		$a=$fighter['coordinate_y'];
-		$y=$y+$a;
 		$fighter->coordinate_y = $y;
 		$fighter->coordinate_x = $x;
-		$Fighters->save($fighter);
-	}
-
-	public function updateXP($xp,$id)
-	{
-		$Fighters = TableRegistry::get('Fighters');
-		$fighter = $Fighters->find('all')->where(['id' == $id ])->first();
-		$a=$fighter['xp'];
-		$xp=$xp+$a;
-		$fighter->xp = $xp;
 		$Fighters->save($fighter);
 	}
 
@@ -115,15 +91,39 @@ class FightersTable extends Table
 	{
 		$Fighters = TableRegistry::get('Fighters');
 		$fighter = $Fighters->find('all')->where(['id' == $id ])->first();
-		$a=$fighter['skill_sight'];
-		$vue=$vue+$a;
-		$a=$fighter['skill_health'];
-		$vie=$vie+$a;
-		$a=$fighter['skill_strength'];
-		$force=$force+$a;
 		$fighter->skill_strength = $force;
 		$fighter->skill_health = $vie;
 		$fighter->skill_sight = $vue;
+		$Fighters->save($fighter);
+	}
+
+	public function updateXP($xp,$id)
+	{
+		$Fighters = TableRegistry::get('Fighters');
+		$fighter = $Fighters->find('all')->where(['id' == $id ])->first();
+		$fighter->xp = $xp;
+		$Fighters->save($fighter);
+	}
+
+	/*
+	public function skillPoint($xp,$id)
+	{
+		$Fighters = TableRegistry::get('Fighters');
+		$fighter = $Fighters->find('all')->where(['id' == $id ])->first();
+		$skillPoint = floor($xp/4) + 1 - $fighter->level;  // xp/4 + level de depart - le level non updaté
+
+		return $skillPoint;
+	}
+
+	public function updateLevel($niv,$id)
+	{
+		$Fighters = TableRegistry::get('Fighters');
+		$fighter = $Fighters->find('all')->where(['id' == $id ])->first();
+
+		$skillP = skillPoint($fighter->xp, $fighter->id);
+
+		$fighter->level = $niv - ($skillP - 1);
+
 		$Fighters->save($fighter);
 	}
 
@@ -131,25 +131,39 @@ class FightersTable extends Table
 	{
 		$Fighters = TableRegistry::get('Fighters');
 		$fighter = $Fighters->find('all')->where(['id' == $id ])->first();
-		$a=$fighter['level'];
-		$fighter->level = $niv+$a;
+
+		$fighter->level = $niv;
 		$Fighters->save($fighter);
 	}
-
-	public function updatePv($pv,$id)
-	{
-		$Fighters = TableRegistry::get('Fighters');
-		$fighter = $Fighters->get($id);
-		$a=$fighter['current_health'];
-		$fighter->current_health = $a-$pv;
-		$Fighters->save($fighter);
-	}
+	*/
 
 
-	public function isOwnedBy($fighterId, $userId)
-	{
-	    return $this->exists(['id' => $fighterId, 'player_id' => $userId]);
-	}
+	public function update_level($id, $skill)
+		{
+			$Fighters = TableRegistry::get('Fighters');
+			$fighter = $Fighters->find('all')->where(['id' => $id ])->first();
 
+			$data = $skill;
+			if($data==1) {
+				$fighter->skill_sight++;//Vue +1
+				$fighter->level++;      //level +1
+				$fighter->current_health = $fighter->skill_health;//Vie remontée au max
+				$Fighters->save($fighter);
+			}
 
+			if($data==2) {
+				$fighter->skill_health = $fighter->skill_health+3;//+ 3 PV
+				$fighter->current_health = $fighter->skill_health;//Vie remontée au max
+				$fighter->level++;
+				$Fighters->save($fighter);
+			}
+
+			if($data==3) {
+				$fighter->skill_strength++;//force +1
+				$fighter->level++;
+				$fighter->current_health = $fighter->skill_health;//Vie remontée au max
+				$Fighters->save($fighter);
+			}
+				//$this->redirect("/arenas/sight");
+		}
 }
