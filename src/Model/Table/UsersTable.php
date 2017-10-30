@@ -12,12 +12,7 @@ use Cake\Validation\Validator;
 		{
 			return $validator
 			->notEmpty('username', "Un nom d'utilisateur est nécessaire")
-			->notEmpty('password', 'Un mot de passe est nécessaire')
-			->notEmpty('role', 'Un role est nécessaire')
-			->add('role', 'inList', [
-			'rule' => ['inList', ['admin', 'author']],
-			'message' => 'Merci de rentrer un role valide'
-			]);
+			->notEmpty('password', 'Un mot de passe est nécessaire');
 		}
 	}
 
