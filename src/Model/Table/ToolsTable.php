@@ -28,7 +28,9 @@ class ToolsTable extends Table
 		$tools->save($tool);
 
 	}
-
 }
+
+
+
 
 ?>
