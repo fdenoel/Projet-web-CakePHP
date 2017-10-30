@@ -5,11 +5,13 @@ $proximite=0;
 $occupe;
 
 
-echo $this->Form->create('Fighters', array('url'=>['controller'=>'surroundings', 'action'=>'generationDecor']));
+echo $this->Form->create('Surroundings', array('url'=>['controller'=>'surroundings', 'action'=>'generationDecor']));
+echo $this->Form->hidden('id', array('value'=> $fighter['id']));
 echo $this->Form->button('régénération du décor', array('type'=>'submit'));
 echo $this->Form->end();
 
-echo $this->Form->create('Fighters', array('url'=>['controller'=>'tools', 'action'=>'generationEquipement']));
+echo $this->Form->create('Tools', array('url'=>['controller'=>'tools', 'action'=>'generationEquipement']));
+echo $this->Form->hidden('id', array('value'=> $fighter['id']));
 echo $this->Form->button('génération de l\'équipement', array('type'=>'submit'));
 echo $this->Form->end();
 echo "<br>";
@@ -49,16 +51,6 @@ while($x<15)
 					if($obstacle['coordinate_x']==$x && $obstacle['coordinate_y']==$y && $obstacle['type']=='P')
 					{
 						echo "x";
-						$occupe=1;
-					}
-					if($obstacle['coordinate_x']==$x && $obstacle['coordinate_y']==$y && $obstacle['type']=='T')
-					{
-						echo "t";
-						$occupe=1;
-					}
-					if($obstacle['coordinate_x']==$x && $obstacle['coordinate_y']==$y && $obstacle['type']=='W')
-					{
-						echo "w";
 						$occupe=1;
 					}
 				}
@@ -107,7 +99,6 @@ foreach($arene as $obstacle)
 		}
 	}
 }
-
 
 echo $this->Form->create('Fighters', array('url'=>['controller'=>'Fighters', 'action'=>'deplacement']));
 echo $this->Form->hidden('id', array('value'=> $fighter['id']));
