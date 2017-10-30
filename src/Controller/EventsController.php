@@ -10,6 +10,15 @@
 	*/
 	class EventsController extends AppController
 	{
+
+		public function isAuthorized()
+		{
+			if ($this->request->getParam('action') === 'affichage') {
+		        return true;
+		    }
+		}
+
+
 		public function affichage()
 		{
 			

@@ -16,39 +16,21 @@ use Cake\ORM\TableRegistry;
 */
 class ArenasController  extends AppController
 {
-public function index()
-{
-//die('test');
-  /*  $this->set('myname', "Julien Falconnet");
-    $this->loadModel('Fighters');
-	$figterlist=$this->Fighters->find('all');
-	pr($figterlist->toArray());
 
-	$this->loadModel('Fighters');
-	$figterlist=$this->Fighters->find('all');
-	pr($figterlist->toArray());
-	
-	$res=$this->Fighters->test();
-	$this->set("test",$res);*/
 
-	
-}
-public function login()
-{
-//die('test');
-}
-public function fighter()
-{
-//die('test');
-}
-public function sight()
-{
+	public function initialize()
+	    {
+	        parent::initialize();
+	        $this->loadComponent('Flash'); // Charge le FlashComponent
+	    }
 
+
+public function sight($id)
+{
 	//charger le fighter choisi par le joueur
-	$this->loadModel('Fighters');
+	$fighters=$this->loadModel('Fighters');
 	$tools=$this->loadModel('tools');
-	$fighters = TableRegistry::get('Fighters');
-	$fig=$this->Fighters->Aragorn();
+	$fig=$fighters->get($id);
 
 	//charger la map
 	$this->loadModel('Surroundings');
@@ -56,7 +38,9 @@ public function sight()
 
 	/*si l'une des coordonnées du combattant est à 15(non initialisées) alors tant qu'on a pas un couple de coordonnées correspondant à un espace libre, on génère des positions aléatoirement*/
 	/*dès que le couple est bon, on met la table à jour*/
-	if ($fig['coordinate_y']==15 || $fig['coordinate_x']==15) {
+	$x=$fig->coordinate_x;
+	$y=$fig['coordinate_y'];
+	if ($y==15 || $x==15) {
 		$sortie="FALSE";
 		while($sortie=="FALSE")
 		{
@@ -70,7 +54,7 @@ public function sight()
 				}
 				if($sortie=="TRUE")
 				{	
-					$fighter = $fighters->find('all')->where(['coordinate_x' == 15 or 'coordinate_y' == 15])->first();
+					$fighter = $fighters->get($id);
 					$fighter->coordinate_x = $a;
 					$fighter->coordinate_y = $b;
 					$fighters->save($fighter);
@@ -83,6 +67,7 @@ public function sight()
 
 	
 	$fig2 = $fighters->find('all');
+	$fig=$fighters->get($id);
 
 	//envoyer le fighter
 	$this->set("allFighters",$fig2);
@@ -92,15 +77,20 @@ public function sight()
 	$this->set("arene", $sur);
 }
 
-
 public function diary()
 {
 //die('test');
 }
-public function appFighter()
-{
-	
-}
+public function isAuthorized($user)
+		{
+		    // Le propriétaire d'un article peut l'éditer et le supprimer
+		    if (in_array($this->request->getParam('action'), ['sight'])) {
+		        $fighterId = (int)$this->request->getParam('pass.0');
+		        if ($this->Fighters->isOwnedBy($fighterId, $user['id'])) {
+		            return true;
+		        }
+	    	}
+		}
 }
 
 ?>

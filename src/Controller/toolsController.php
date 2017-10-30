@@ -110,21 +110,30 @@ class ToolsController  extends AppController
 
 
 			$sur=$this->Surroundings->arene();
-	$fig=$this->Fighters->Aragorn();
-	$fig2=$this->Fighters->find('all');
-	$tools=$this->Tools->find('all');
+		$fig=$f->get($this->request->data['id']);
+		$fig2=$this->Fighters->find('all');
+		$tools=$this->Tools->find('all');
 
-	$this->set("tool", $tools);
+		$this->set("tool", $tools);
 
-	//envoyer le fighter
-	$this->set("allFighters",$fig2);
-	$this->set("fighter", $fig);
-	//envoyer la map
-	$this->set("arene", $sur);
-	$this->render('../Arenas/sight');
+		//envoyer le fighter
+		$this->set("allFighters",$fig2);
+		$this->set("fighter", $fig);
+		//envoyer la map
+		$this->set("arene", $sur);
+		$this->render('../Arenas/sight');
 	}
 
+
+	public function isAuthorized($user)
+		{
+		    // Le propriétaire d'un article peut l'éditer et le supprimer
+		    if ($this->request->getParam('action') === 'generationEquipement') {
+		        return true;
+		    }
+		}
 }
+
 ?>
 
 

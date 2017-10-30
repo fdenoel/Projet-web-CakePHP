@@ -14,7 +14,7 @@ public function generationDecor()//fonction implémentée, qui peut être appel�
 	$nbelements=15;
 	$compteur=0;
 	$a=$this->loadModel('Surroundings');
-	$this->loadModel('Fighters');
+	$fighters=$this->loadModel('Fighters');
 	$this->loadModel('tools');
 	$a->suppression();
 
@@ -98,7 +98,7 @@ public function generationDecor()//fonction implémentée, qui peut être appel�
 
 
 	$sur=$this->Surroundings->arene();
-	$fig=$this->Fighters->Aragorn();
+	$fig=$fighters->get($this->request->data['id']);
 	$fig2=$this->Fighters->find('all');
 	$tools=$this->tools->find('all');
 
@@ -111,5 +111,14 @@ public function generationDecor()//fonction implémentée, qui peut être appel�
 	$this->render('../Arenas/sight');
 }
 
+	public function isAuthorized($user)
+		{
+		    // Le propriétaire d'un article peut l'éditer et le supprimer
+		    if ($this->request->getParam('action') === 'generationDecor') {
+		        return true;
+		    }
+		}
 }
+
+
 ?>
