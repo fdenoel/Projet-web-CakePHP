@@ -29,15 +29,16 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('cake.css') ?> <!-- Changer pour le CSS (par exemple faire le bootstrap) -->
 
-    <?= $this->fetch('meta') ?>
+    <?= $this->fetch('meta') ?> 
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
     <?php $this->assign('title', 'Projet_Php');?> <!-- Change le titre en haut à gauche "Projet_Php"-->
     <?php echo $this->Html->link('Acceuil | ', '/'); ?>
-    <?php echo $this->Html->link('Vue | ', '/Arenas/Sight'); ?>
+    <?php echo $this->Html->link('Jouer | ', '/Fighters/choisirFighter'); ?>
+    <?php echo $this->Html->link('Page fighter | ', '/Fighters/index'); ?>
+    <?php echo $this->Html->link('Journal | ', '/Events/affichage'); ?>
     <?php echo $this->Html->link('Ajouter joueur | ', '/Users/add'); ?>
     <?php echo $this->Html->link('Login | ', '/Users/login'); ?>
-    <?php echo $this->Html->link('Page fighter | ', '/Fighters/index'); ?>
     <?php echo $this->Html->link('Logout ', '/Users/logout'); ?>
     
 </head>
