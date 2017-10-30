@@ -5,7 +5,7 @@
 <fieldset>
 <legend><?= __("Merci de rentrer vos nom d'utilisateur et mot de passe") ?></
 ˓→legend>
-<?= $this->Form->control('username') ?>
+<?= $this->Form->control('email') ?>
 <?= $this->Form->control('password') ?>
 </fieldset>
 <?= $this->Form->button(__('Se Connecter')); ?>
