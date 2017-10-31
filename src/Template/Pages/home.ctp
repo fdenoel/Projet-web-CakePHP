@@ -21,14 +21,17 @@
 
     <div class="jumbotron">
 
-        <div class="row">
+
+        <div class="row ">
+            <div class="col-md-2">
+            </div>
              <div class="col-md-8">
                 <?php echo $this->Html->image('webarenaHome.png', array('alt' => 'CakePHP', 'border' => '0', 'data-src' => 'holder.js/100%x100')); ?>
              </div>
         </div>
 
       <div class="prez">
-        <h1 class = "h1">Bienvenu sur WebArena</h1>
+        <h2 class = "h2">Bienvenu sur WebArena</h2>
             <p.lead>
                 C'est un jeu de combat dans lequel le joueur crée son combattant et affronte d'autres joueurs dans une arène pour gagner de l'expérience et des niveaux.</br>
                 En progressant à travers les niveaux, le combattant voit ses caractéristiques augmenter et peut gagner de l'équipement.</br>
