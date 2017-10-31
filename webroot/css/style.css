@@ -1,19 +1,9 @@
-body, html {
-    height: 100%;
-
-    /* The image used */
-    background-image: url("http://www.planwallpaper.com/static/images/Wallpapers-for-Background-HD-Wallpaper-1080x607.jpg");
-
-    /* Full height */
-    height: 100%; 
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-p {
-	color: white;
-	font-size : 18px;
-}
+header { margin: auto;
+    	width: 50%;
+    	padding: 10px;  }
+body {
+	background-image: url("../webroot/img/bckgrd.jpg");
+	background-color: #cccccc;}
+.panel-footer {	position: fixed;
+	bottom:0px;
+	width: 100%;}
