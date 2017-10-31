@@ -17,8 +17,6 @@
 			'3'=> 'Force +1'
 			);
 		echo $this->Form->input('skill' , array('options' => $options));
-		echo $this->Form->select('choix',
-		    ['Vue +1', 'Vie max +3', 'Force +1'], ['empty' => '(Choisissez un skill à augmenter)']);
 
 		?><button type="submit" class="btn btn-default">Selectionner</button><?php 
 		echo $this->Form->end();
