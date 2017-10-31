@@ -59,7 +59,7 @@
 		public function isAuthorized($user)
 		{
 		    // Tous les utilisateurs enregistrés peuvent ajouter des articles
-		    if ($this->request->getParam('action') === 'add' || $this->request->getParam('action') === 'choisirFighter' || $this->request->getParam('action') === 'deplacement' || $this->request->getParam('action') === 'combat') {
+		    if ($this->request->getParam('action') === 'add' || $this->request->getParam('action') === 'choisirFighter' || $this->request->getParam('action') === 'deplacement' || $this->request->getParam('action') === 'combat' || $this->request->getParam('action') === 'updateLevel') {
 		        return true;
 		    }
 		    // Le propriétaire d'un article peut l'éditer et le supprimer
@@ -82,6 +82,33 @@
 				$this->Fighters->id = 1;
 				$this->request->data = $this->Fighters->read();
 			}
+		}
+
+		public function updateLevel()
+		{
+
+			
+				$a=$this->loadModel('Fighters');
+				$b=0;
+				//$fighterlist=$this->Fighters->find('all');
+				//pr($fighterlist->toArray());
+
+				$fighters = TableRegistry::get('Fighters');
+
+				$fig=$this->Fighters->get($this->request->data['id']);
+				$this->set("f",$fig);
+				$skill=$this->request->data['skill'];
+				if($skill<>0){
+					$b=1;
+					$a->update_level($fig['id'], $this->request->data['skill']);
+					$this->redirect(['controller' => 'Arenas', 'action' => 'sight', $this->request->data['id']]);
+			}
+			if($b==1)
+			{
+
+				$this->redirect(['controller' => 'Arenas', 'action' => 'sight', $this->request->data['id']]);
+			}
+			
 		}
 	
 
@@ -166,6 +193,7 @@
 								$f=$this->loadModel('Fighters');
 								$f->deleteFighter($fig['id']);
 								$vivant=0;
+								$arret=1;
 							}
 							
 						}
@@ -246,6 +274,7 @@
 								$f=$this->loadModel('Fighters');
 								$f->deleteFighter($fig['id']);
 								$vivant=0;
+								$arret=1;
 							}	
 						}
 					}
@@ -323,6 +352,7 @@
 								$f=$this->loadModel('Fighters');
 								$f->deleteFighter($fig['id']);
 								$vivant=0;
+								$arret=1;
 							}
 							
 						}
@@ -401,6 +431,7 @@
 								$f=$this->loadModel('Fighters');
 								$f->deleteFighter($fig['id']);
 								$vivant=0;
+								$arret=1;
 							}
 							
 						}
@@ -461,7 +492,7 @@
 			}
 			else
 			{
-				$this->render('choisirFighter');
+				$this->redirect(['action' => 'choisirFighter']);
 			}
 			
 		}
