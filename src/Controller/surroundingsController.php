@@ -13,6 +13,7 @@ public function generationDecor()//fonction implémentée, qui peut être appel�
 {
 	$nbelements=15;
 	$compteur=0;
+	$tool=$this->loadModel('Tools');
 	$a=$this->loadModel('Surroundings');
 	$fighters=$this->loadModel('Fighters');
 	$this->loadModel('tools');
@@ -37,6 +38,12 @@ public function generationDecor()//fonction implémentée, qui peut être appel�
 				$loop=1;
 			}	
 		}
+		foreach ($tool as $obstacle) {
+				if($obstacle['coordinate_x'] == $coordx && $obstacle['coordinate_y'] == $coordy)
+				{
+					$loop=1;
+				}
+			}
 		if($loop==0)
 			{
 				$a->insertion($compteur+1, 'P', $x, $y);

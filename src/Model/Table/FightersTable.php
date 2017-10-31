@@ -78,16 +78,6 @@ class FightersTable extends Table
 		$fighters->delete($fighter);
 	}
 
-	public function allFighters(){
-		return $this->find('all')->first();
-	}
-	public function Aragorn(){
-		return $this->find('all')->where(['id' => 1])->first();
-	}
-	public function Gimli(){
-		return $this->find('all')->where(['id' => 3])->first();
-	}
-
 	public function updatePosition($x,$y,$id)
 	{
 		$Fighters = TableRegistry::get('Fighters');
@@ -127,25 +117,6 @@ class FightersTable extends Table
 		$Fighters->save($fighter);
 	}
 
-	public function updateLevel($niv,$id)
-	{
-		$Fighters = TableRegistry::get('Fighters');
-		$fighter = $Fighters->get($id);
-		$a=$fighter['level'];
-		$fighter->level = $niv+$a;
-		$Fighters->save($fighter);
-	}
-
-	public function updatePv($pv,$id)
-	{
-		$Fighters = TableRegistry::get('Fighters');
-		$fighter = $Fighters->get($id);
-		$a=$fighter['current_health'];
-		$fighter->current_health = $a-$pv;
-		$Fighters->save($fighter);
-	}
-
-
 	public function update_level($id, $skill)
 		{
 			$Fighters = TableRegistry::get('Fighters');
@@ -171,6 +142,16 @@ class FightersTable extends Table
 			}
 				//
 		}
+
+	public function updatePv($pv,$id)
+	{
+		$Fighters = TableRegistry::get('Fighters');
+		$fighter = $Fighters->get($id);
+		$a=$fighter['current_health'];
+		$fighter->current_health = $a-$pv;
+		$Fighters->save($fighter);
+	}
+
 
 
 	public function isOwnedBy($fighterId, $userId)
