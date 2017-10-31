@@ -27,7 +27,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('base.css') ?>
+    <?= $this->Html->css('style.css') ?>
     <?= $this->Html->css('bootstrap.css') ?> <!-- Changer pour le CSS (par exemple faire le bootstrap) -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -47,7 +47,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 </head>
 <body>
     <!-- Si vous voulez qu'un menu soit rendu pour toutes vos vues, incluez le ici -->
-    <nav class="top-bar expanded" data-topbar role="navigation">
+    <!--<nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
                 <h1><a href=""><?= $this->fetch('title') ?></a></h1>
@@ -59,7 +59,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
             </ul>
         </div>
-    </nav>
+    </nav>-->
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <!-- C'est ici que je veux voir mes vues être rendues -->
