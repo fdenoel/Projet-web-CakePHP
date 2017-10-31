@@ -17,6 +17,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,19 +28,21 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?> <!-- Changer pour le CSS (par exemple faire le bootstrap) -->
+    <?= $this->Html->css('bootstrap.css') ?> <!-- Changer pour le CSS (par exemple faire le bootstrap) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <?= $this->fetch('meta') ?> 
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
     <?php $this->assign('title', 'Projet_Php');?> <!-- Change le titre en haut à gauche "Projet_Php"-->
-    <?php echo $this->Html->link('Acceuil | ', '/'); ?>
-    <?php echo $this->Html->link('Jouer | ', '/Fighters/choisirFighter'); ?>
-    <?php echo $this->Html->link('Page fighter | ', '/Fighters/index'); ?>
-    <?php echo $this->Html->link('Journal | ', '/Events/affichage'); ?>
-    <?php echo $this->Html->link('Ajouter joueur | ', '/Users/add'); ?>
-    <?php echo $this->Html->link('Login | ', '/Users/login'); ?>
-    <?php echo $this->Html->link('Logout ', '/Users/logout'); ?>
+
+    <button type="submit" class="btn btn-default"><?php echo $this->Html->link('Acceuil', '/'); ?></button>
+    <button type="submit" class="btn btn-default"><?php echo $this->Html->link('Jouer', '/Fighters/choisirFighter'); ?></button>
+    <button type="submit" class="btn btn-default"><?php echo $this->Html->link('Page fighter', '/Fighters/index'); ?></button>
+    <button type="submit" class="btn btn-default"><?php echo $this->Html->link('Journal', '/Events/affichage'); ?></button>
+    <button type="submit" class="btn btn-default"><?php echo $this->Html->link('Ajouter joueur', '/Users/add'); ?></button>
+    <button type="submit" class="btn btn-default"><?php echo $this->Html->link('Login', '/Users/login'); ?></button>
+    <button type="submit" class="btn btn-default"><?php echo $this->Html->link('Logout', '/Users/logout'); ?></button>
     
 </head>
 <body>
@@ -63,11 +66,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('content') ?>
     <!-- Ajoute un footer pour chaque page rendue -->
     </div>
-    <footer>
+    <footer class="panel-footer">
             <p>Groupe : SI2-02 </p>
             <p>Option : AF</p>
             <p>Auteurs : BIOY Guillaume, DENOEL Florent, VINOT DE LARMINAT Benoît</p>
             <p>Lien GIThub : https://github.com/fdenoel/Projet-web-CakePHP</p>    
     </footer>
+
 </body>
 </html>

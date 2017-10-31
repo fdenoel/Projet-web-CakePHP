@@ -1,12 +1,12 @@
 <!-- src/Template/Users/add.ctp -->
-<div class="users form">
 <?= $this->Form->create($user) ?>
 <fieldset>
 <legend><?= __('Ajouter un utilisateur') ?></legend>
 <?= $this->Form->control('email') ?>
 <?= $this->Form->control('password') ?>
 </fieldset>
-<?= $this->Form->button(__('Ajouter')); ?>
+<button type="submit" class="btn btn-default">Ajouter</button>
 <?= $this->Form->end() ?>
-</div>
+
+
 
