@@ -27,7 +27,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('base.css') ?>
+    <?= $this->Html->css('style.css') ?>
     <?= $this->Html->css('bootstrap.css') ?> <!-- Changer pour le CSS (par exemple faire le bootstrap) -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
 
@@ -36,8 +36,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
     <?php $this->assign('title', 'Projet_Php');?> <!-- Change le titre en haut à gauche "Projet_Php"-->
     <?php echo $this->Html->link($this->Html->tag('span','',['class' => 'glyphicon glyphicon-home']).' Acceuil',['controller' => '/'],['class' => 'btn btn-default', 'role' => 'button' , 'escape' => false]);?>
-    <?php echo $this->Html->link($this->Html->tag('span','',['class' => 'glyphicon glyphicon-play']).' Jouer',['controller' => 'Fighters', 'action' => 'choisirfighter'],['class' => 'btn btn-default', 'role' => 'button' , 'escape' => false]);?>
-    <?php echo $this->Html->link($this->Html->tag('span','',['class' => 'glyphicon glyphicon-eye-open']).' Page fighter',['controller' => 'Fighters', 'action' => 'index'],['class' => 'btn btn-default', 'role' => 'button' , 'escape' => false]);?>
+    <?php echo $this->Html->link($this->Html->tag('span','',['class' => 'glyphicon glyphicon-play']).' Jouer',['controller' => 'Fighters', 'action' => 'choisirFighter'],['class' => 'btn btn-default', 'role' => 'button' , 'escape' => false]);?>
+    <?php echo $this->Html->link($this->Html->tag('span','',['class' => 'glyphicon glyphicon-eye-open']).' Liste fighter',['controller' => 'Fighters', 'action' => 'index'],['class' => 'btn btn-default', 'role' => 'button' , 'escape' => false]);?>
     <?php echo $this->Html->link($this->Html->tag('span','',['class' => 'glyphicon glyphicon-calendar']).' Journal',['controller' => 'Events', 'action' => 'affichage'],['class' => 'btn btn-default', 'role' => 'button' , 'escape' => false]);?>
     <?php echo $this->Html->link($this->Html->tag('span','',['class' => 'glyphicon glyphicon-plus']).' Ajouter joueur',['controller' => 'Users', 'action' => 'add'],['class' => 'btn btn-default', 'role' => 'button' , 'escape' => false]);?>
     <?php echo $this->Html->link($this->Html->tag('span','',['class' => 'glyphicon glyphicon-user']).' Login',['controller' => 'Users', 'action' => 'login'],['class' => 'btn btn-default', 'role' => 'button' , 'escape' => false]);?>

@@ -26,11 +26,11 @@ class UsersController extends AppController
     if ($this->request->is('post')) {
         $user = $this->Players->patchEntity($user, $this->request->getData());
         if ($this->Players->save($user)) {
-                $this->Flash->success(__("L'utilisateur a été sauvegardé."));
+                $this->Flash->success(__('L utilisateur a été sauvegardé.'));
                 return $this->redirect(['controller' => 'Users',
                                         'action' => 'login']);
             }
-            $this->Flash->error(__("Impossible d'ajouter l'utilisateur."));
+            $this->Flash->error(__('Impossible d ajouter l utilisateur.'));
             }
         $this->set('user', $user);
         }

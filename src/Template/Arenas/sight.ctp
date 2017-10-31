@@ -150,7 +150,11 @@ foreach($arene as $obstacle)
 	{
 		if(($fighter['coordinate_x']==$obstacle['coordinate_x']-1 && $fighter['coordinate_y']==$obstacle['coordinate_y']) || ($fighter['coordinate_x']==$obstacle['coordinate_x']+1 && $fighter['coordinate_y']==$obstacle['coordinate_y']) || ($fighter['coordinate_x']==$obstacle['coordinate_x'] && $fighter['coordinate_y']==$obstacle['coordinate_y']-1) ||($fighter['coordinate_x']==$obstacle['coordinate_x'] && $fighter['coordinate_y']==$obstacle['coordinate_y']+1))
 		{
+			?><kbd>
+				<?php
 			echo "<br>Brise suspecte<br>";
+			?></kbd>
+			<?php
 		}
 	}
 }
@@ -161,7 +165,11 @@ foreach($arene as $obstacle)
 	{
 		if(($fighter['coordinate_x']==$obstacle['coordinate_x']-1 && $fighter['coordinate_y']==$obstacle['coordinate_y']) || ($fighter['coordinate_x']==$obstacle['coordinate_x']+1 && $fighter['coordinate_y']==$obstacle['coordinate_y']) || ($fighter['coordinate_x']==$obstacle['coordinate_x'] && $fighter['coordinate_y']==$obstacle['coordinate_y']-1) ||($fighter['coordinate_x']==$obstacle['coordinate_x'] && $fighter['coordinate_y']==$obstacle['coordinate_y']+1))
 		{
+			?><kbd>
+				<?php
 			echo "<br>Puanteur<br>";
+			?></kbd>
+			<?php
 		}
 	}
 }
