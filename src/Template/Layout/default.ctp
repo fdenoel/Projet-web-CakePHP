@@ -27,27 +27,26 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('style.css') ?>
+    <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('bootstrap.css') ?> <!-- Changer pour le CSS (par exemple faire le bootstrap) -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
 
     <?= $this->fetch('meta') ?> 
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
     <?php $this->assign('title', 'Projet_Php');?> <!-- Change le titre en haut à gauche "Projet_Php"-->
-
-    <button type="submit" class="btn btn-default"><?php echo $this->Html->link('Acceuil', '/'); ?></button>
-    <button type="submit" class="btn btn-default"><?php echo $this->Html->link('Jouer', '/Fighters/choisirFighter'); ?></button>
-    <button type="submit" class="btn btn-default"><?php echo $this->Html->link('Page fighter', '/Fighters/index'); ?></button>
-    <button type="submit" class="btn btn-default"><?php echo $this->Html->link('Journal', '/Events/affichage'); ?></button>
-    <button type="submit" class="btn btn-default"><?php echo $this->Html->link('Ajouter joueur', '/Users/add'); ?></button>
-    <button type="submit" class="btn btn-default"><?php echo $this->Html->link('Login', '/Users/login'); ?></button>
-    <button type="submit" class="btn btn-default"><?php echo $this->Html->link('Logout', '/Users/logout'); ?></button>
+    <?php echo $this->Html->link($this->Html->tag('span','',['class' => 'glyphicon glyphicon-home']).' Acceuil',['controller' => '/'],['class' => 'btn btn-default', 'role' => 'button' , 'escape' => false]);?>
+    <?php echo $this->Html->link($this->Html->tag('span','',['class' => 'glyphicon glyphicon-play']).' Jouer',['controller' => 'Fighters', 'action' => 'choisirfighter'],['class' => 'btn btn-default', 'role' => 'button' , 'escape' => false]);?>
+    <?php echo $this->Html->link($this->Html->tag('span','',['class' => 'glyphicon glyphicon-eye-open']).' Page fighter',['controller' => 'Fighters', 'action' => 'index'],['class' => 'btn btn-default', 'role' => 'button' , 'escape' => false]);?>
+    <?php echo $this->Html->link($this->Html->tag('span','',['class' => 'glyphicon glyphicon-calendar']).' Journal',['controller' => 'Events', 'action' => 'affichage'],['class' => 'btn btn-default', 'role' => 'button' , 'escape' => false]);?>
+    <?php echo $this->Html->link($this->Html->tag('span','',['class' => 'glyphicon glyphicon-plus']).' Ajouter joueur',['controller' => 'Users', 'action' => 'add'],['class' => 'btn btn-default', 'role' => 'button' , 'escape' => false]);?>
+    <?php echo $this->Html->link($this->Html->tag('span','',['class' => 'glyphicon glyphicon-user']).' Login',['controller' => 'Users', 'action' => 'login'],['class' => 'btn btn-default', 'role' => 'button' , 'escape' => false]);?>
+    <?php echo $this->Html->link($this->Html->tag('span','',['class' => 'glyphicon glyphicon-off']).' Logout',['controller' => 'Users', 'action' => 'logout'],['class' => 'btn btn-default', 'role' => 'button' , 'escape' => false]);?>
     
 </head>
 <body>
-    <!-- Si vous voulez qu'un menu soit rendu pour toutes vos vues, incluez le ici 
-    <nav class="top-bar expanded" data-topbar role="navigation">
+    <!-- Si vous voulez qu'un menu soit rendu pour toutes vos vues, incluez le ici -->
+    <!--<nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
                 <h1><a href=""><?= $this->fetch('title') ?></a></h1>
@@ -59,14 +58,14 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
             </ul>
         </div>
-    </nav>-->
+    </nav> -->
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <!-- C'est ici que je veux voir mes vues être rendues -->
         <?= $this->fetch('content') ?>
     <!-- Ajoute un footer pour chaque page rendue -->
     </div>
-    <footer class="panel-footer">
+    <footer class="panel-footer" >
             <p>Groupe : SI2-02 </p>
             <p>Option : AF</p>
             <p>Auteurs : BIOY Guillaume, DENOEL Florent, VINOT DE LARMINAT Benoît</p>
