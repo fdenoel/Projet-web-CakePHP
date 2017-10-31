@@ -41,12 +41,16 @@ class PlayersController extends AppController
         if ($this->request->is('post')) {
             $player = $this->Players->patchEntity($player, $this->request->getData());
             if ($this->Players->save($player)) {
-                $this->Flash->success(__('L\'utilisateur a été sauvegardé !'));
+                $this->Flash->success("Vos identifiants ont bien été sauvegardés", [
+                    'key' => 'positive']);
                 return $this->redirect(['action' => 'login']);
             }
-            $this->Flash->error(__('Impossible d\'ajouter le nouvelle utilisateur.'));
+            $this->Flash->error(__('Impossible d\'ajouter le nouvelle utilisateur.'[
+                    'key' => 'negatif']););
         }
         $this->set('player', $player);
+        $this->Flash->error(__('Ce mail a déjà été pris !'[
+                    'key' => 'negatif']););
     }
 
     public function login()
@@ -56,10 +60,12 @@ class PlayersController extends AppController
             if ($player) {
                 $this->Auth->setUser($player);
                 //return $this->redirect($this->Auth->redirectUrl());
+                $this->Flash->success("Bienvenue sur Webarena !", [
+                    'key' => 'positive']);
                 return $this->redirect(['controller' => 'Arenas',
                                         'action' => 'index']);
             }
-            $this->Flash->error(__('Invalid username or password, try again'));
+            $this->Flash->error(__('Mauvais identifiant ou mot de passe !'));
         }
     }
 
