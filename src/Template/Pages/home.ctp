@@ -7,6 +7,7 @@
                 $this->assign('title', 'Page d\'accueil');
                 echo $this->Html->css('bootstrap.min.css');
                 echo $this->Html->css('bootstrap.css');
+                echo $this->Html->css('style.css');
                 echo $this->Html->script([
                 'jquery-1.12.4.min.js',
                 'bootstrap.min.js']);
@@ -15,7 +16,6 @@
         </head>
 
 <body>
-
     <!-- SCRIPTS -->
     <script type="text/javascript" src="../../js/compiled.min.js"></script>
 
@@ -31,7 +31,7 @@
         </div>
 
       <div class="prez">
-        <h2 class = "h2">Bienvenu sur WebArena</h2>
+        <h2>Bienvenu sur WebArena</h2>
             <p.lead>
                 C'est un jeu de combat dans lequel le joueur crée son combattant et affronte d'autres joueurs dans une arène pour gagner de l'expérience et des niveaux.</br>
                 En progressant à travers les niveaux, le combattant voit ses caractéristiques augmenter et peut gagner de l'équipement.</br>
@@ -40,7 +40,7 @@
       </div>
 
       <div class='regles'>
-            <h2 class = "h2">Règles du jeu</h2>
+            <h2>Règles du jeu</h2>
             <p.lead>
                 Tous les combattants sont placés sur l'arène et doivent survivres au milieux des monstres, des pieèges et des autres combattants.</br>
                 Il peut soit se déplacer, soit attaquer. A chaque attaque, le combattant obtient de l'experience.</br>
