@@ -8,7 +8,7 @@
 <body>
 <h1>Tous les fighters</h1>
 <table class="table table-hover">
-    <tr>
+    <tr class="active">
         <th><h5>Id</h5></th>
         <th><h5>Pseudo</h5></th>
         <th><h5>Actions</h5></th>
@@ -17,7 +17,7 @@
     <!-- Ici se trouve l'itération sur l'objet query de nos $articles, l'affichage des infos des articles -->
 
     <?php foreach ($fighter as $fighter): ?>
-    <tr>
+    <tr class="active">
         <td><h6><?= $fighter->id ?></h6></td>
         <td>
            <h6> <?= $this->Html->link($fighter->name, ['action' => 'view', $fighter->id]) ?></h6>
@@ -32,7 +32,7 @@
     </tr>
     <?php endforeach; ?>
 </table>
-<div class="row">
+<div class="row" style="background-color: white; opacity: 0.60;">
         <div class="col-md-3"><?= $this->Html->link(
                             'Ajouter un fighter', '/Fighters/add',
                             ['class' => 'button', 'target' => '_blank']) ?></div>
