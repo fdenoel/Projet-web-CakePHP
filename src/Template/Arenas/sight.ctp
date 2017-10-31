@@ -226,7 +226,7 @@ echo $this->Form->end();
 
 </div>
  <div class="row">
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1">
 <?php
 
 
@@ -240,7 +240,7 @@ echo $this->Form->end();
 
 ?>
 </div>
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1">
 
  	<?php
 
@@ -254,7 +254,7 @@ echo $this->Form->end();
 ?>
 
 </div>
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1">
 <?php
 
 echo $this->Form->create('Fighters', array('url'=>['controller'=>'Fighters', 'action'=>'deplacement']));
@@ -267,7 +267,7 @@ echo $this->Form->end();
 
 ?> </div>
 
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1">
  	<?php
  	echo $this->Form->create('Fighters', array('url'=>['controller'=>'Fighters', 'action'=>'updateLevel']));
 echo $this->Form->hidden('id', array('value'=> $fighter['id']));
@@ -277,10 +277,10 @@ echo $this->Form->hidden('skill', array('value'=> 0));
 echo $this->Form->end();
 ?>
  </div>
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1">
 
  </div>
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1">
  </div>
 
 
@@ -289,7 +289,7 @@ echo $this->Form->end();
 
 
 
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1">
 <?php
 
 
@@ -303,7 +303,7 @@ echo $this->Form->end();
 
 ?>
 </div>
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1">
 
 <?php
 
@@ -318,7 +318,7 @@ echo $this->Form->end();
 
 
 </div>
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1">
 <?php
 
 echo $this->Form->create('Fighters', array('url'=>['controller'=>'Fighters', 'action'=>'combat']));
@@ -341,9 +341,9 @@ echo $this->Form->end();
 
 </div>
  <div class="row">
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1">
  </div>
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1" style="background-color: white;">
 <?php
 
 
@@ -352,19 +352,19 @@ echo "avancer";
 
 ?>
  </div>
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1">
  </div>
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1">
  </div>
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1">
  </div>
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1">
  </div>
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1">
  </div>
 
 
- <div class="col-md-1">
+ <div class="col-md-1 col-xs-1" style="background-color: white;">
  	<?php
 echo "attaquer";?>
  </div>
